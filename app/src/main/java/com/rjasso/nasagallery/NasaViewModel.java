@@ -36,7 +36,7 @@ public class NasaViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call<List<NasaAPI>> call, Throwable t) {
-
+                // TODO Implement Failure logic
             }
 
         });

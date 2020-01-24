@@ -1,5 +1,6 @@
 package com.rjasso.nasagallery;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,13 +32,19 @@ class NASAAdapter extends RecyclerView.Adapter<NASAAdapter.NasaViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull NasaViewHolder holder, int position) {
         TextView titleTextView = holder.itemView.findViewById(R.id.titleTextView);
-        TextView authorTextView = holder.itemView.findViewById(R.id.authorTextView);
         TextView dateTextView = holder.itemView.findViewById(R.id.dateTextView);
+        NasaAPI image = picturesList.get(position);
         ImageView imageView = holder.itemView.findViewById(R.id.imageView);
-        titleTextView.setText(picturesList.get(position).getCaption());
-        authorTextView.setText(picturesList.get(position).getCaption());
-        dateTextView.setText(picturesList.get(position).getCaption());
-        Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(imageView);
+        titleTextView.setText(image.getCaption());
+        dateTextView.setText(image.getDate());
+        Picasso.get().load(Constants.IMAGES_LOCATION + image.getImage() + Constants.JPG).into(imageView);
+        holder.itemView.setOnClickListener((View v) -> {
+                Intent intent = new Intent(holder.itemView.getContext(), PictureActivity.class);
+                intent.putExtra(Constants.PICTURE_URL, Constants.IMAGES_LOCATION + image.getImage() + Constants.JPG);
+                intent.putExtra(Constants.PICTURE_NAME, image.getCaption());
+                holder.itemView.getContext().startActivity(intent);
+        });
+
     }
 
     @Override

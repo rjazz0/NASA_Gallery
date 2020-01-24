@@ -48,6 +48,16 @@ String identifier;
     String version;
     CentroidCoordinates centroid_coordinates;
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    String date;
+
 
 }
 
